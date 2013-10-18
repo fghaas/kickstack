@@ -1,6 +1,16 @@
 class kickstack::ceilometer::config inherits kickstack {
 
+  include pwgen
+
+  $admin_password = getvar("${fact_prefix}heat_keystone_password")
   $sql_conn = getvar("${fact_prefix}ceilometer_sql_connection")
+
+  $metering_secret = pick(getvar("${fact_prefix}ceilometer_metering_secret"),pwgen())
+
+  kickstack::exportfact::export { 'ceilometer_metering_secret':
+    value => $metering_secret,
+    tag => 'ceilometer',
+  }
 
   case "$::kickstack::rpc" {
     'rabbitmq': {
@@ -8,6 +18,7 @@ class kickstack::ceilometer::config inherits kickstack {
       $rabbit_password = getvar("${fact_prefix}rabbit_password")
       class { '::ceilometer':
         package_ensure  => $::kickstack::package_version,
+        metering_secret => $metering_secret,
         rpc_backend     => 'ceilometer.openstack.common.rpc.impl_kombu',
         rabbit_host     => $rabbit_host,
         rabbit_password => $rabbit_password,
@@ -22,6 +33,7 @@ class kickstack::ceilometer::config inherits kickstack {
       $qpid_password = getvar("${fact_prefix}qpid_password")
       class { '::ceilometer':
         package_ensure  => $::kickstack::package_version,
+        metering_secret => $metering_secret,
         rpc_backend     => 'ceilometer.openstack.common.rpc.impl_qpid',
         qpid_hostname   => $qpid_hostname,
         qpid_password   => $qpid_password,
