@@ -8,10 +8,7 @@ class kickstack::ceilometer::api inherits kickstack {
   $sql_conn = getvar("${fact_prefix}ceilometer_sql_connection")
 
   class { '::ceilometer::api':
-    verbose           => $kickstack::verbose,
-    debug             => $kickstack::debug,
-    auth_type         => 'keystone',
-    auth_host         => $auth_host,
+    keystone_host     => $auth_host,
     keystone_tenant   => $kickstack::keystone_service_tenant,
     keystone_user     => 'ceilometer',
     keystone_password => $service_password,
