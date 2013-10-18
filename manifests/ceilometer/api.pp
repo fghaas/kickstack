@@ -13,7 +13,7 @@ class kickstack::ceilometer::api inherits kickstack {
     auth_type         => 'keystone',
     auth_host         => $auth_host,
     keystone_tenant   => $kickstack::keystone_service_tenant,
-    keystone_user     => 'glance',
+    keystone_user     => 'ceilometer',
     keystone_password => $service_password,
   }
 
