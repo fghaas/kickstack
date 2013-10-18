@@ -21,7 +21,6 @@ class kickstack::ceilometer::api inherits kickstack {
 
   class { '::ceilometer::db':
     database_connection => $sql_conn,
-    require             => Class['::ceilometer::api']
   }
     
 }
