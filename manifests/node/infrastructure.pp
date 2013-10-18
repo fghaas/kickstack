@@ -8,5 +8,5 @@ class kickstack::node::infrastructure inherits kickstack {
   include kickstack::cinder::db
   include kickstack::neutron::db
   include kickstack::nova::db
-
+  include kickstack::ceilometer::db
 }
