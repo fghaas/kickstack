@@ -13,7 +13,6 @@ class kickstack::ceilometer::config inherits kickstack {
         rabbit_password => $rabbit_password,
         rabbit_virtual_host => $::kickstack::rabbit_virtual_host,
         rabbit_userid   => $::kickstack::rabbit_userid,
-        auth_strategy   => 'keystone',
         verbose         => $::kickstack::verbose,
         debug           => $::kickstack::debug,
       }
@@ -28,7 +27,6 @@ class kickstack::ceilometer::config inherits kickstack {
         qpid_password   => $qpid_password,
         qpid_realm      => $::kickstack::qpid_realm,
         qpid_user       => $::kickstack::qpid_user,
-        auth_strategy   => 'keystone',
         verbose         => $::kickstack::verbose,
         debug           => $::kickstack::debug,
       }
