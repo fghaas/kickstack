@@ -5,7 +5,7 @@ class kickstack::node::api inherits kickstack {
   $cinder_sql_conn = getvar("${fact_prefix}cinder_sql_connection")
   $neutron_sql_conn = getvar("${fact_prefix}neutron_sql_connection")
   $nova_sql_conn = getvar("${fact_prefix}nova_sql_connection")
-  
+  $ceilometer_sql_conn = getvar("${fact_prefix}ceilometer_sql_connection")
 
   case $::kickstack::rpc {
     'rabbitmq': {
